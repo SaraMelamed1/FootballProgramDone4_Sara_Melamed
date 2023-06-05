@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Team {
 
@@ -12,8 +13,8 @@ public class Team {
     public Team(String name){
         this.name = name;
         this.players = new ArrayList<>();
-
-
+        this.players = IntStream
+                .range(0, Constants.PLAYERS_NUM).mapToObj(i -> new Player()).toList();
     }
 
 

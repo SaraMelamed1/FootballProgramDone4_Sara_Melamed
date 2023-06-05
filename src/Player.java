@@ -15,9 +15,5 @@ public class Player {
 
     }
 
-    public boolean isEqualId(int id){
-        return ID == id;
-
-    }
 
 }

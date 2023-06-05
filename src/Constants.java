@@ -1,5 +1,7 @@
 public class Constants {
 
+    public static int PLAYERS_NUM = 15,MATCHES_FOR_ROUND = 5;
+
     public static final String[] PLAYERS_FIRST_NAMES = {"Lionel",
            " Cristiano",
             "Neymar",
