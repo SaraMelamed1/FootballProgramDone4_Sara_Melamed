@@ -2,7 +2,6 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
-//        IntStream.range(10, 20).forEach(item -> System.out.println(item));
        new LeagueManager();
     }
 

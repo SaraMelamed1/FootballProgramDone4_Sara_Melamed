@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Team implements Comparable<Team>{
+public class Team{
 
     private static int COUNT_ID = 1;
     private int id;
@@ -65,18 +65,10 @@ public class Team implements Comparable<Team>{
         return this.countGoals;
     }
 
-//    public boolean isPlayerInTeam(Player player){
-//       return this.players.stream().filter(player1 -> player1 == player).toList().size() == 1;
-//    }
 
     public String toString()
     {
         return this.name;
     }
 
-
-    public int compareTo(Team other) {
-        return this.name.compareTo(other.name);
-
-    }
 }

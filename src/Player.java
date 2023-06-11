@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Player {
 
-    private static int COUNT_ID = 0;
+    private static int COUNT_ID = 1;
     private int id;
     private String firstName;
     private String lastName;

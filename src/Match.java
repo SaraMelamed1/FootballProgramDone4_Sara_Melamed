@@ -69,11 +69,6 @@ public class Match {
         rival.addRivalGoals();
     }
 
-    public boolean isOppositeTeams(Match other)
-    {
-        return other.awayTeam == this.homeTeam && other.homeTeam == this.awayTeam;
-    }
-
     public boolean isSameTeams(Match other){
         return other.awayTeam == this.awayTeam || other.awayTeam == this.homeTeam ||
                 other.homeTeam == this.awayTeam ||  other.homeTeam == this.homeTeam;
@@ -89,12 +84,6 @@ public class Match {
         return result ;
     }
 
-//    public int numGoalsByTeam(int teamId){
-//       if (isTeamExist(teamId)){
-//           this.goals.stream().map(goal -> goal.getScorer()).
-//           }
-//       }
-//    }
 
     public boolean equals(Match other){
       return this.homeTeam == other.awayTeam && this.awayTeam == other.homeTeam;

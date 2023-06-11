@@ -23,21 +23,7 @@ public class LeagueManager {
 
    }
 
-   //TODO צריך להוסיף תפריט אחרי כל סיבוב מחזור
    private void startLeague(){
-      //הפעלת כלל המשחקים במחזורים בתכנות רגיל
-//      for (int i = 0; i<this.allRounds.size();i++)
-//      {
-//         System.out.println("ROUND " + (i+1));
-//         List<Match> round = this.allRounds.get(i);
-//
-//         for (int j = 0; j< round.size();j++)
-//         {
-//            Match match = round.get(j);
-//            countSeconds();
-//            match.play();
-//         }
-//      }
 
       IntStream.range(0, this.allRounds.size())
               .forEach(i -> {
@@ -46,7 +32,7 @@ public class LeagueManager {
 
                  round.forEach(match -> {
                     System.out.println(match);
-//                    countSeconds();
+                   // countSeconds();
                     match.play();
                  });
                  System.out.println("-------------------------");
@@ -55,35 +41,44 @@ public class LeagueManager {
                  System.out.println("-------------------------");
                  this.nowRound++;
                  System.out.println("**************************");
-//                 menu();
+                 menu();
                  System.out.println("**************************");
               });
 
    }
 
    private void menu(){
-      Scanner scanner = new Scanner(System.in);
       printFirstMenu();
       int firstChoose ,secondChoose;
 
-//      AtomicInteger c= new AtomicInteger(2);
-//      IntStream.range(1, c.get()).forEach(i->{
-//         firstChoose = Stream.generate(scanner::nextInt).findFirst().get();
-//         if (!isEnterValid(firstChoose))
-//         {
-//            c.getAndIncrement();
-//         }
-//      });
-      do {
-         firstChoose = scanner.nextInt();
-      }while (!isEnterValid(firstChoose) || !isValidFirstChoose(firstChoose));
+      firstChoose = Integer.parseInt(getValidFirstChoose());
 
       printSecondMenuByChoose(firstChoose);
-      do {
-         secondChoose = scanner.nextInt();
-      }while (!isEnterValid(secondChoose) || !isValidSecondChoose(firstChoose,secondChoose));
+      secondChoose = Integer.parseInt(getValidSecondChoose(firstChoose));
 
       resultMenu(firstChoose,secondChoose);
+   }
+   private String getValidSecondChoose( int firstChoose) {
+      Scanner scanner = new Scanner(System.in);
+      String number = scanner.nextLine();
+
+      if (!isEnterValid(number) || !isValidSecondChoose(firstChoose,Integer.parseInt(number))) {
+
+         return getValidSecondChoose(firstChoose);
+      } else {
+         return number;
+      }
+   }
+   private String getValidFirstChoose() {
+     Scanner scanner = new Scanner(System.in);
+      String number = scanner.nextLine();
+
+      if (!isEnterValid(number) || !isValidFirstChoose(number)) {
+
+         return getValidFirstChoose();
+      } else {
+         return number;
+      }
    }
 
    private void resultMenu(int firstChoose ,int secondChoose){
@@ -115,10 +110,8 @@ public class LeagueManager {
 
       if (choose == Constants.FIND_MATCHES_BY_TEAM)//להגביל ל10
       {
-        for (int i = 0; i<this.teams.size(); i++)
-        {
-           System.out.println("press " + (i+1) + " to "+ this.teams.get(i));
-        }
+         IntStream.range(0, teams.size())
+                 .forEach(i -> System.out.println("press " + (i + 1) + " to " + teams.get(i)));
 
       } else if (choose == Constants.FIND_TOP_SCORING_TEAMS) //להגביל ל10
       {
@@ -141,29 +134,30 @@ public class LeagueManager {
       if(firstChoose == Constants.FIND_MATCHES_BY_TEAM ||
               firstChoose == Constants.FIND_TOP_SCORING_TEAMS||
               firstChoose == Constants.FIND_TEAM_BY_POSITION){
-         if (secondChoose <1||secondChoose>10){
+         if (secondChoose <1||secondChoose>Constants.MAX_TEAMS){
             System.out.println("Please choose number between 1 TO 10");
             result = false;
          }
       } else if (firstChoose == Constants.FIND_TOP_SCORERS) {
-         if (secondChoose <1||secondChoose>150){
+         if (secondChoose <1||secondChoose>Constants.MAX_TEAMS * Constants.NUM_OF_PLAYERS_AT_TEAM){
             System.out.println("Please choose number between 1 TO 150");
             result = false;
          }
       }
       return result;
    }
-   private boolean isEnterValid(int choose){
+   private boolean isEnterValid(String choose){
       boolean result = true;
-      if ( !isAllNum(String.valueOf(choose))){
+      if ( !isAllNum(choose)){
          System.out.println("Please write only Numbers");
          result = false;
       }
       return result;
    }
-   private boolean isValidFirstChoose(int choose){
+   private boolean isValidFirstChoose(String choose){
       boolean result = true;
-      if (choose <1||choose>5){
+      int num = Integer.parseInt(choose);
+      if (num <1||num>Constants.MAX_OPTIONS_FIRST_MENU){
          System.out.println("Please choose number between 1 TO 5");
          result = false;
       }
@@ -172,11 +166,16 @@ public class LeagueManager {
 
    private boolean isAllNum(String number) {
       boolean only = false;
-      int counter = 0;
-      for (int i = 0; i < number.length(); i++) {
-         if (Character.isDigit(number.charAt(i)))
-            counter++;
-      }
+//      int counter = 0;
+//      for (int i = 0; i < number.length(); i++) {
+//         if (Character.isDigit(number.charAt(i)))
+//            counter++;
+//      }
+      int counter = (int) number.chars()
+              .mapToObj(Character::isDigit)
+              .filter(isDigit -> isDigit)
+              .count();
+
       if (counter == number.length())
          only = true;
       return only;
