@@ -32,7 +32,7 @@ public class LeagueManager {
 
                  round.forEach(match -> {
                     System.out.println(match);
-                   // countSeconds();
+                    countSeconds();
                     match.play();
                  });
                  System.out.println("-------------------------");
