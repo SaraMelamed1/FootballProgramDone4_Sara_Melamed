@@ -51,6 +51,21 @@ public class Main {
 //              .filter(match -> match != null)
 //              .distinct()
 //              .collect(Collectors.toList());
+    //** like up
+    //      for (int i = 0; i < allMatches.size(); i++) {
+//         if (allMatches.get(i) != null) {
+//            for (int j = i + 1; j < allMatches.size(); j++) {
+//               if (allMatches.get(j) != null) {
+//                  if (allMatches.get(i).isOppositeTeams(allMatches.get(j))) {
+//                     allMatches.remove(allMatches.get(j));
+//                  }
+//               }
+//
+//            }
+//
+//         }
+//
+//      }
 
     //// למה לא עובד? זה לא שם את הקבוצה עם עצמה נכון?
 //      List<Match> matches = IntStream.range(0, teams.size() - 1)
