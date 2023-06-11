@@ -5,13 +5,15 @@ import java.util.stream.IntStream;
 
 public class Match {
 
-    private static int ID = 0;
+    private static int COUNT_ID = 1;
+    private int id;
     private Team homeTeam;
     private Team awayTeam;
     private List<Goal> goals;
 
     public Match(Team homeTeam,Team awayTeam ){
-        ID++;
+        this.id = COUNT_ID;
+        COUNT_ID++;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.goals = new ArrayList<>();
@@ -79,7 +81,12 @@ public class Match {
 
     public boolean isTeamExist(int teamId)
     {
-        return homeTeam.isEqualId(teamId) || awayTeam.isEqualId(teamId);
+        boolean result = false;
+        if (homeTeam.isEqualId(teamId) || awayTeam.isEqualId(teamId))
+        {
+            result = true;
+        }
+        return result ;
     }
 
 //    public int numGoalsByTeam(int teamId){
